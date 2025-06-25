@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AirportRegistration.API\AirportRegistration.API.csproj" />
     <ProjectReference Include="..\AirportRegistration.Application\AirportRegistration.Application.csproj" />
     <ProjectReference Include="..\AirportRegistration.Infrastructure\AirportRegistration.Infrastructure.csproj" />
   </ItemGroup>

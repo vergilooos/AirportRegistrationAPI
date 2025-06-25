@@ -106,5 +106,35 @@ namespace AirportRegistration.Tests.Services
             _repoMock.Verify(r => r.AddAsync(It.IsAny<Person>()), Times.Once);
         }
 
+
+        [Fact]
+        public async Task GetByAirportAsync_Should_Return_People_In_Specified_Airport()
+        {
+            // Arrange
+            var airportCode = "BCN";
+            var people = new List<Person>
+    {
+        new Person
+        {
+            Id = Guid.NewGuid(),
+            FirstName = "Mehran",
+            LastName = "Bayat",
+            PassportNumber = "PB1234567",
+            AirportCode = airportCode,
+            Airport = new Airport { Code = airportCode, Name = "Barcelona" }
+        }
+    };
+
+            _repoMock.Setup(r => r.GetByAirportCodeAsync(airportCode)).ReturnsAsync(people);
+
+            // Act
+            var result = await _service.GetByAirportAsync(airportCode);
+
+            // Assert
+            result.Should().HaveCount(1);
+            result[0].AirportCode.Should().Be(airportCode);
+            result[0].AirportName.Should().Be("Barcelona");
+        }
+
     }
 }

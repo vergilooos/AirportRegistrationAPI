@@ -79,5 +79,31 @@ namespace AirportRegistration.Tests.Controllers
 
             result.Should().BeOfType<CreatedAtActionResult>();
         }
+        [Fact]
+        public async Task GetByAirport_ShouldReturnOk_WithFilteredPeople()
+        {
+            // Arrange
+            var airportCode = "MAD";
+            _serviceMock.Setup(s => s.GetByAirportAsync(airportCode)).ReturnsAsync(new List<PersonDto>
+    {
+        new PersonDto
+        {
+            Id = Guid.NewGuid(),
+            FirstName = "Ali",
+            LastName = "Test",
+            AirportCode = airportCode,
+            AirportName = "Madrid"
+        }
+    });
+
+            // Act
+            var result = await _controller.GetByAirport(airportCode);
+
+            // Assert
+            var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
+            var people = okResult.Value.Should().BeAssignableTo<List<PersonDto>>().Subject;
+            people.Should().OnlyContain(p => p.AirportCode == airportCode);
+        }
+
     }
 }
