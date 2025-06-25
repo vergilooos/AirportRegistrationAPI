@@ -72,27 +72,39 @@ namespace AirportRegistration.Tests.Services
                 AirportCode = "BCN"
             };
 
-            // Mimic "GetById" after create
-            var id = Guid.NewGuid();
-            var created = new Person
-            {
-                Id = id,
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
-                PassportNumber = dto.PassportNumber,
-                AirportCode = dto.AirportCode,
-                Airport = new Airport { Code = "BCN", Name = "Barcelona Airport" }
-            };
+            // We'll capture the person that gets passed into AddAsync
+            Person? createdPerson = null;
 
-            _repoMock.Setup(r => r.AddAsync(It.IsAny<Person>())).Returns(Task.CompletedTask);
-            _repoMock.Setup(r => r.GetByIdAsync(id)).ReturnsAsync(created);
+            _repoMock.Setup(r => r.AddAsync(It.IsAny<Person>()))
+                .Callback<Person>(p => createdPerson = p)
+                .Returns(Task.CompletedTask);
 
-            // Simulate service
+            _repoMock.Setup(r => r.GetByIdAsync(It.IsAny<Guid>()))
+                .ReturnsAsync(() =>
+                {
+                    // Simulate what would be retrieved after creation
+                    return new Person
+                    {
+                        Id = createdPerson?.Id ?? Guid.NewGuid(),
+                        FirstName = createdPerson?.FirstName ?? "",
+                        LastName = createdPerson?.LastName ?? "",
+                        PassportNumber = createdPerson?.PassportNumber ?? "",
+                        AirportCode = createdPerson?.AirportCode ?? "",
+                        Airport = new Airport { Code = "BCN", Name = "Barcelona Airport" }
+                    };
+                });
+
+            // Act
             var result = await _service.CreateAsync(dto);
 
+            // Assert
             result.Should().NotBeNull();
             result.AirportCode.Should().Be("BCN");
             result.FirstName.Should().Be("Sara");
+
+            // Optionally: verify AddAsync was actually called
+            _repoMock.Verify(r => r.AddAsync(It.IsAny<Person>()), Times.Once);
         }
+
     }
 }
