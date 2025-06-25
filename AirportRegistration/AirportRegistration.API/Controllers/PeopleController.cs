@@ -27,6 +27,8 @@ namespace AirportRegistration.API.Controllers
         /// </summary>
         // GET: /api/people
         [HttpGet]
+        [ProducesResponseType(typeof(List<PersonDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAll()
         {
             _logger.LogInformation("Fetching all registered people...");
@@ -36,6 +38,9 @@ namespace AirportRegistration.API.Controllers
 
         // GET: /api/people/{id}
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(PersonDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetById(Guid id)
         {
             _logger.LogInformation("Fetching person with ID {Id}", id);
@@ -52,6 +57,9 @@ namespace AirportRegistration.API.Controllers
 
         // POST: /api/people
         [HttpPost]
+        [ProducesResponseType(typeof(PersonDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Create([FromBody] PersonCreateDto dto)
         {
             _logger.LogInformation("Creating new person with passport {Passport}", dto.PassportNumber);
@@ -68,6 +76,10 @@ namespace AirportRegistration.API.Controllers
 
         // PUT: /api/people/{id}
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(PersonDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Update(Guid id, [FromBody] PersonUpdateDto dto)
         {
             _logger.LogInformation("Updating person with ID {Id}", id);
@@ -96,6 +108,9 @@ namespace AirportRegistration.API.Controllers
 
         // DELETE: /api/people/{id}
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(Guid id)
         {
             _logger.LogInformation("Deleting person with ID {Id}", id);
@@ -111,6 +126,8 @@ namespace AirportRegistration.API.Controllers
         }
 
         [HttpGet("airport/{code}")]
+        [ProducesResponseType(typeof(List<PersonDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetByAirport(string code)
         {
             _logger.LogInformation("Fetching people registered at airport {AirportCode}", code);

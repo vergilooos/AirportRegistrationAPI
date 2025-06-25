@@ -1,4 +1,5 @@
-﻿using AirportRegistration.Domain.Repositories;
+﻿using AirportRegistration.Domain.Entities;
+using AirportRegistration.Domain.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,8 @@ namespace AirportRegistration.API.Controllers
         /// Returns the list of all available airports
         /// </summary>
         [HttpGet]
+        [ProducesResponseType(typeof(List<Airport>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAll()
         {
             _logger.LogInformation("Fetching all airports...");
