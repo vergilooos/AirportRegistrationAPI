@@ -7,6 +7,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using AirportRegistration.Application.Validators;
 
+using AirportRegistration.API.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,6 +59,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Global error handling for unhandled exceptions
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseAuthorization();
 
