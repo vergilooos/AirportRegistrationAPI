@@ -1,13 +1,12 @@
+using AirportRegistration.API.Middleware;
+using AirportRegistration.Application.Mappings;
 using AirportRegistration.Application.Services;
+using AirportRegistration.Application.Validators;
 using AirportRegistration.Infrastructure;
 using AirportRegistration.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
-
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using AirportRegistration.Application.Validators;
-
-using AirportRegistration.API.Middleware;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +24,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite
 builder.Services.AddInfrastructureServices();
 
 builder.Services.AddScoped<IPersonService, PersonService>();
+
+builder.Services.AddAutoMapper(typeof(PersonProfile).Assembly);
 
 // Register FluentValidation
 builder.Services.AddFluentValidationAutoValidation();
