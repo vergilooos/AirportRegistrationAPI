@@ -109,5 +109,14 @@ namespace AirportRegistration.API.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("airport/{code}")]
+        public async Task<IActionResult> GetByAirport(string code)
+        {
+            _logger.LogInformation("Fetching people registered at airport {AirportCode}", code);
+            var result = await _personService.GetByAirportAsync(code);
+            return Ok(result);
+        }
+
     }
 }

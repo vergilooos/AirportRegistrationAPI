@@ -160,5 +160,12 @@ namespace AirportRegistration.Application.Services
 
             return true;
         }
+
+        public async Task<List<PersonDto>> GetByAirportAsync(string code)
+        {
+            var people = await _repository.GetByAirportCodeAsync(code);
+            return _mapper.Map<List<PersonDto>>(people);
+        }
+
     }
 }

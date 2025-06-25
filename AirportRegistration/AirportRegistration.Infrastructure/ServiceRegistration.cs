@@ -14,6 +14,8 @@ namespace AirportRegistration.Infrastructure
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
             services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IAirportRepository, AirportRepository>();
+
             return services;
         }
     }

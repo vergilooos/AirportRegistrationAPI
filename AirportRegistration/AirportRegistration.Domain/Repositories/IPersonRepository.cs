@@ -14,5 +14,7 @@ namespace AirportRegistration.Domain.Repositories
         Task AddAsync(Person person);
         Task UpdateAsync(Person person);
         Task DeleteAsync(Guid id);
+        Task<List<Person>> GetByAirportCodeAsync(string code);
+
     }
 }

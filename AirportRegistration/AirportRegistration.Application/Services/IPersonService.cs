@@ -15,5 +15,7 @@ namespace AirportRegistration.Application.Services
         Task<PersonDto> CreateAsync(PersonCreateDto dto);
         Task<PersonDto?> UpdateAsync(Guid id, PersonUpdateDto dto);
         Task<bool> DeleteAsync(Guid id);
+        Task<List<PersonDto>> GetByAirportAsync(string code);
+
     }
 }

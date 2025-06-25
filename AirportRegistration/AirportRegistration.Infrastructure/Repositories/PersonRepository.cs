@@ -55,5 +55,13 @@ namespace AirportRegistration.Infrastructure.Repositories
                 await _db.SaveChangesAsync();
             }
         }
+
+        public async Task<List<Person>> GetByAirportCodeAsync(string code)
+        {
+            return await _db.People
+                .Include(p => p.Airport)
+                .Where(p => p.AirportCode == code)
+                .ToListAsync();
+        }
     }
 }
