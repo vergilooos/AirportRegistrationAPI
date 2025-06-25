@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportRegistration.Applica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportRegistration.Infrastructure", "AirportRegistration.Infrastructure\AirportRegistration.Infrastructure.csproj", "{7524235F-5F7B-44AF-969D-C05F7C3C4DDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportRegistration.Tests", "AirportRegistration.Tests\AirportRegistration.Tests.csproj", "{604EBFDE-3359-4EB7-ADE2-DEF7AA449326}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7524235F-5F7B-44AF-969D-C05F7C3C4DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7524235F-5F7B-44AF-969D-C05F7C3C4DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7524235F-5F7B-44AF-969D-C05F7C3C4DDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{604EBFDE-3359-4EB7-ADE2-DEF7AA449326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{604EBFDE-3359-4EB7-ADE2-DEF7AA449326}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{604EBFDE-3359-4EB7-ADE2-DEF7AA449326}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{604EBFDE-3359-4EB7-ADE2-DEF7AA449326}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
