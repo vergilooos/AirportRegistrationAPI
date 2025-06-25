@@ -5,6 +5,12 @@ VisualStudioVersion = 17.14.36202.13 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportRegistration.API", "AirportRegistration.API\AirportRegistration.API.csproj", "{7ADC1567-268F-438C-9F27-952C9F07D028}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportRegistration.Domain", "AirportRegistration.Domain\AirportRegistration.Domain.csproj", "{89E1093C-67C4-4361-99E5-E910110480B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportRegistration.Application", "AirportRegistration.Application\AirportRegistration.Application.csproj", "{375ABBE2-CBA7-4B32-AB96-B2BEC63BBE61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportRegistration.Infrastructure", "AirportRegistration.Infrastructure\AirportRegistration.Infrastructure.csproj", "{7524235F-5F7B-44AF-969D-C05F7C3C4DDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{7ADC1567-268F-438C-9F27-952C9F07D028}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7ADC1567-268F-438C-9F27-952C9F07D028}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7ADC1567-268F-438C-9F27-952C9F07D028}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89E1093C-67C4-4361-99E5-E910110480B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89E1093C-67C4-4361-99E5-E910110480B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89E1093C-67C4-4361-99E5-E910110480B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89E1093C-67C4-4361-99E5-E910110480B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{375ABBE2-CBA7-4B32-AB96-B2BEC63BBE61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{375ABBE2-CBA7-4B32-AB96-B2BEC63BBE61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{375ABBE2-CBA7-4B32-AB96-B2BEC63BBE61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{375ABBE2-CBA7-4B32-AB96-B2BEC63BBE61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7524235F-5F7B-44AF-969D-C05F7C3C4DDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7524235F-5F7B-44AF-969D-C05F7C3C4DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7524235F-5F7B-44AF-969D-C05F7C3C4DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7524235F-5F7B-44AF-969D-C05F7C3C4DDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
