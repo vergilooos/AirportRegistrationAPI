@@ -1,3 +1,4 @@
+using AirportRegistration.Application.Services;
 using AirportRegistration.Infrastructure;
 using AirportRegistration.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddInfrastructureServices();
+
+builder.Services.AddScoped<IPersonService, PersonService>();
 
 var app = builder.Build();
 

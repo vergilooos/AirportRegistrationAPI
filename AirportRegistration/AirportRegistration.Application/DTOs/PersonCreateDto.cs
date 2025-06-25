@@ -13,7 +13,7 @@ namespace AirportRegistration.Application.DTOs
         public string LastName { get; set; } = default!;
         public string Email { get; set; } = default!;
        
-        public string phone { get; set; } = default!;
+        public string Phone { get; set; } = default!;
         public string PassportNumber { get; set; } = default!;
         public string AirportCode { get; set; } = default!;
     }
