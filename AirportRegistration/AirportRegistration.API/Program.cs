@@ -1,3 +1,11 @@
+using AirportRegistration.Infrastructure;
+using AirportRegistration.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+
+
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +15,30 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// add EF Core
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
 var app = builder.Build();
+
+// Apply seed data at startup
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+    // Apply any pending migrations to the database //TODO
+    await dbContext.Database.MigrateAsync();
+
+    // Seed the airports
+    await AirportSeeder.SeedAsync(dbContext);
+}
+// TEMP: Check if database contains seeded airports
+//var airports = await dbContext.Airports.ToListAsync();
+//Console.WriteLine($"Airport count in DB: {airports.Count}");
+//foreach (var a in airports)
+//{
+//    Console.WriteLine($"- {a.Code}: {a.Name}");
+//}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
