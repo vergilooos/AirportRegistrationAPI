@@ -3,7 +3,9 @@ using AirportRegistration.Infrastructure;
 using AirportRegistration.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using AirportRegistration.Application.Validators;
 
 
 
@@ -22,6 +24,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite
 builder.Services.AddInfrastructureServices();
 
 builder.Services.AddScoped<IPersonService, PersonService>();
+
+// Register FluentValidation
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<PersonCreateValidator>();
 
 var app = builder.Build();
 
