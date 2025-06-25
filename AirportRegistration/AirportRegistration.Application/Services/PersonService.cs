@@ -6,22 +6,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace AirportRegistration.Application.Services
 {
+
     // person related business logic
     public class PersonService : IPersonService
     {
         private readonly IPersonRepository _repository;
+        private readonly ILogger<PersonService> _logger;
 
-        public PersonService(IPersonRepository repository)
+        public PersonService(IPersonRepository repository, ILogger<PersonService> logger)
         {
             _repository = repository;
+            _logger = logger;
+
         }
 
 
         public async Task<List<PersonDto>> GetAllAsync()
         {
+            _logger.LogInformation("Fetching all people from repository");
+
             var people = await _repository.GetAllAsync();
 
             // Manually map entities to DTOs
@@ -71,14 +78,20 @@ namespace AirportRegistration.Application.Services
 
             await _repository.AddAsync(person);
 
+            _logger.LogInformation("Creating person with passport number {PassportNumber}", dto.PassportNumber);
+
             return await GetByIdAsync(person.Id) ?? throw new Exception("Person creation failed.");
         }
 
         public async Task<PersonDto?> UpdateAsync(Guid id, PersonUpdateDto dto)
         {
             var person = await _repository.GetByIdAsync(id);
+            _logger.LogInformation("Updating person {Id}", id);
             if (person == null)
+            {
+                _logger.LogWarning("Person with ID {Id} not found for update.", id);
                 return null;
+            }
 
             person.FirstName = dto.FirstName;
             person.LastName = dto.LastName;
@@ -96,9 +109,14 @@ namespace AirportRegistration.Application.Services
         {
             var person = await _repository.GetByIdAsync(id);
             if (person == null)
+            {
+                _logger.LogWarning("Attempted to delete non-existing person with ID {Id}.", id);
                 return false;
+            }
 
             await _repository.DeleteAsync(id);
+            _logger.LogInformation("Deleting person with ID {Id}", id);
+
             return true;
         }
     }
