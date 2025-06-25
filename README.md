@@ -1,112 +1,108 @@
+# Airport Registration API
 
-Airport Registration API
-This is a .NET 8 Web API that allows users to register themselves to one of the major airports in Spain.
+This is a .NET 8 Web API that allows users to register themselves to one of the major airports in Spain.  
 The goal is to demonstrate clean design, separation of concerns, proper testing, and scalable architecture.
 
-🧩 Features
-Clean Architecture (Domain, Application, Infrastructure, API)
+---
 
-Entity Framework Core with SQLite (file-based)
+## Features
 
-FluentValidation for request validation
+- Clean Architecture (Domain, Application, Infrastructure, API)
+- Entity Framework Core with SQLite (file-based)
+- FluentValidation for request validation
+- AutoMapper for DTO mapping
+- Global exception handling with structured error responses
+- Structured logging using `ILogger`
+- Swagger UI for testing and documentation
+- Full CRUD for `Person` entity
+- Optional filtering by airport code
+- Airport list seeded at startup
 
-AutoMapper for DTO mapping
+---
 
-Global exception handling with structured error responses
+## Technologies Used
 
-Structured logging using ILogger
+- ASP.NET Core 8
+- Entity Framework Core + SQLite
+- FluentValidation
+- AutoMapper
+- xUnit + Moq + FluentAssertions
+- WebApplicationFactory (for integration testing)
 
-Swagger UI for testing and documentation
+---
 
-Full CRUD for Person entity
+## How to Run
 
-Optional filtering by airport code
+1. Clone the repository
+2. Open the solution in Visual Studio 2022
+3. Build and run the `AirportRegistration.API` project
+4. Navigate to: `https://localhost:{port}/swagger`
 
-Airport list seeded at startup
+The database will be created automatically at `Data/airport.db`  
+Initial data includes a set of major Spanish airports.
 
-📋 Technologies Used
-ASP.NET Core 8
+---
 
-Entity Framework Core with SQLite
+## API Overview
 
-FluentValidation
+### People Endpoints
 
-AutoMapper
+- `GET /api/people`  
+  Get all registered people
 
-xUnit, Moq, FluentAssertions
+- `GET /api/people/{id}`  
+  Get a specific person by ID
 
-WebApplicationFactory (for integration testing)
+- `POST /api/people`  
+  Register a new person
 
-🧪 Testing
-All layers are fully tested:
+- `PUT /api/people/{id}`  
+  Update an existing person
 
-Validation Tests for PersonCreateDto
+- `DELETE /api/people/{id}`  
+  Delete a person
 
-Unit Tests for PersonService
+- `GET /api/people/airport/{code}`  
+  Get all people registered at a specific airport  
+  _(Added as an enhancement)_
 
-Controller Tests using mock services
+### Airport Endpoints
 
-Integration Tests using in-memory SQLite and WebApplicationFactory
+- `GET /api/airports`  
+  Get the full list of airports  
+  _(Added for usability in Swagger/UI)_
 
-Tests cover both expected flows and edge cases, and ensure that all new functionality is verified.
+---
 
-📁 How to Run
-Clone the repository
+## Testing Strategy
 
-Open the solution in Visual Studio 2022
+Unit and integration tests are included for the following:
 
-Build and run the API project
+- DTO validation using FluentValidation
+- Application service logic with mock repositories
+- Controller behavior with mocked services
+- End-to-end HTTP testing using WebApplicationFactory and SQLite In-Memory
 
-Swagger UI will open at:
-https://localhost:{port}/swagger
+Test coverage includes valid and invalid scenarios.
 
-The database file will be created automatically in Data/airport.db, and seeded with a list of Spanish airports.
+---
 
-🔧 API Overview
-POST /api/people
-Register a new person
-→ Validates names, passport format, and airport code
+## Notes on Design Decisions
 
-GET /api/people
-Get all registered people
+The following improvements were made beyond what was explicitly required:
 
-GET /api/people/{id}
-Get a specific person by ID
+- **Global exception handling** with unified error output
+- **Structured logging** for service and controller layers
+- **AutoMapper** to simplify and decouple mapping logic
+- **Airport filtering and listing APIs** to simulate real-world usage
+- **Integration testing** for full request-response verification
 
-PUT /api/people/{id}
-Update an existing person
+These features were included to showcase attention to quality, maintainability, and scalability.
 
-DELETE /api/people/{id}
-Delete a person by ID
+---
 
-GET /api/people/airport/{code}
-Get all people registered at a specific airport
-(Added for real-world usability, not required by original task)
+## Deliverables
 
-GET /api/airports
-Get full list of available airports
-(Added for UI or Swagger usability)
-
-✅ Notes Beyond the Original Task
-The original task did not require some features that were included for better design and real-world completeness:
-
-Global exception handling with consistent error output
-
-Structured logging for all operations
-
-AutoMapper to avoid manual entity-DTO conversions
-
-Airport filtering API (GET /api/people/airport/{code})
-
-Airport list API (GET /api/airports)
-
-Integration Testing with full HTTP request/response flow
-
-These were included intentionally to demonstrate a more scalable, production-ready approach.
-
-📦 Deliverables
-All code is committed step by step
-
-Each feature is broken down logically into Git commits
-
-Testing is comprehensive and reflects real scenarios
+- All code is modular, layered, and testable
+- Git history reflects incremental, meaningful commits
+- The solution is ready to run and validate via Swagger UI
